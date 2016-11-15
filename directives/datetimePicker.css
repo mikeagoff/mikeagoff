@@ -1,0 +1,14 @@
+.ccs-datetime-picker {
+	width: 180px;
+	height: 194px;
+	position: absolute;
+}
+
+.ccs-datetime-picker a, .ccs-datetime-picker a:hover {
+	text-decoration: none;
+}
+
+.ccs-datetime-picker-monthYear {
+	text-align: center;
+	width: 100px;
+}
