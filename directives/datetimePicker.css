@@ -1,14 +1,68 @@
 .ccs-datetime-picker {
-	width: 180px;
-	height: 194px;
-	position: absolute;
+	width: 220px;
+	height: 240px;
+	position: relative;
+	padding: 5px;
+	border-radius: 5px;
+	box-shadow: 10px 10px 51px -5px rgba(0,0,0,0.54);
+}
+
+.ccs-date-picker-header {
+	font-weight: bold;
 }
 
 .ccs-datetime-picker a, .ccs-datetime-picker a:hover {
-	text-decoration: none;
+	text-decoration: none!important;
+	cursor: pointer;
 }
 
-.ccs-datetime-picker-monthYear {
+.ccs-date-picker-monthYear {
 	text-align: center;
-	width: 100px;
+	width: 142px;
+}
+.ccs-date-picker-days{
+	clear: both;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.ccs-date-picker-day, .ccs-date-picker-day-current, .ccs-date-picker-day-selected {
+	border-radius: 2px;
+	background: #f3ecec;
+	border: 1px solid #ddd;
+	height: 28px;
+	width: 28px;
+	float: left;
+	margin: 0 2px 2px 0;
+	color: #000;
+}
+
+.ccs-date-picker-day-current {
+	background: #d3e9f5;
+}
+
+.ccs-date-picker-day-selected {
+	background: #67c0f1;
+	color: #fff;
+}
+
+.ccs-date-picker-days .one {
+    position: relative;
+    top: 3px;
+    left: 10px;
+}
+
+.ccs-date-picker-days .two {
+    position: relative;
+    top: 3px;
+    left: 5px;
+}
+
+.ccs-date-picker-day:hover, .ccs-date-picker-day-current:hover {
+	background: #ccd9ff!important;
+}
+
+.ccs-date-picker-day-selected:hover {
+	background: #067ab9!important;
 }

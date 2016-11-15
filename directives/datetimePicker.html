@@ -1,7 +1,7 @@
 <div>
 	
 	<div class="ccs-datetime-picker">
-		<div class="ccs-datetime-picker-header">
+		<div class="ccs-date-picker-header">
 			<div class="pull-left">
 				<a href="" ng-click="minusYear()">
 					<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
@@ -10,7 +10,7 @@
 					<i class="fa fa-chevron-left"></i>
 				</a>
 			</div>
-			<div class="ccs-datetime-picker-monthYear pull-left">
+			<div class="ccs-date-picker-monthYear pull-left">
 				{{currentMonth}} {{currentYear}}
 			</div>
 			<div class="pull-right">
@@ -21,10 +21,24 @@
 					<i class="fa fa-chevron-right"></i>
 				</a>
 			</div>
+		</div>
 
+		<div class="ccs-date-picker-days">
+			
+			<div ng-repeat="d in daysArray track by $index" ng-click="selectDay(d)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
+				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
+					{{d.day}}
+				</span>
+			</div>
+		</div>
+
+
+		
+
+		<div class="ccs-time-picker">
 
 		</div>
 
 	</div>
-
+	<pre style="position: relative;top: 300px">{{model}}</pre>
 </div>
