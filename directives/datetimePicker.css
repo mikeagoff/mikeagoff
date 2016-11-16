@@ -18,7 +18,7 @@
 
 .ccs-date-picker-monthYear {
 	text-align: center;
-	width: 142px;
+	width: 118px;
 }
 .ccs-date-picker-days{
 	clear: both;
@@ -65,4 +65,8 @@
 
 .ccs-date-picker-day-selected:hover {
 	background: #067ab9!important;
+}
+
+.adjustMonth {
+	margin: 0 6px;
 }

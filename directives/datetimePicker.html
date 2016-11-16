@@ -6,7 +6,7 @@
 				<a href="" ng-click="minusYear()">
 					<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
 				</a>
-				<a href="" ng-click="minusMonth()">
+				<a href="" ng-click="minusMonth()" class="adjustMonth">
 					<i class="fa fa-chevron-left"></i>
 				</a>
 			</div>
@@ -14,11 +14,11 @@
 				{{currentMonth}} {{currentYear}}
 			</div>
 			<div class="pull-right">
+				<a href="" ng-click="plusMonth()" class="adjustMonth">
+					<i class="fa fa-chevron-right"></i>
+				</a>
 				<a href="" ng-click="plusYear()">
 					<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-				</a>
-				<a href="" ng-click="plusMonth()">
-					<i class="fa fa-chevron-right"></i>
 				</a>
 			</div>
 		</div>
@@ -31,9 +31,6 @@
 				</span>
 			</div>
 		</div>
-
-
-		
 
 		<div class="ccs-time-picker">
 

@@ -2,19 +2,28 @@
   	'use strict';
 
 
-  	var app = angular.module('app', ['ngRoute']);
+  	var app = angular.module('myApp');
 
     app.directive("datetimePicker", [function(){
         return {
 
             restrict: 'E'
             , replace: true
-            , scope: {}
+            , scope: {
+                date:'=', 
+                range:'@'
+            }
             , templateUrl : "/directives/datetimePicker.html"
             , controller: ['$scope', '$element', '$sce', function ($scope, $element, $sce) {
 
                 $scope.currentDate = new Date(Date.now());
+
+                if($scope.date != null && $scope.date != ''){
+                    $scope.currentDate = $scope.date
+                }
+
                 $scope.daysArray = [];
+                
                 $scope.model = {
                     day: '',
                     month: '',
@@ -164,7 +173,7 @@
                     $scope.model.day = day.day;
                     $scope.currentDate = new Date(day.year, day.month -1, day.day)
                     $scope.generateDays();
-
+                    $scope.date = $scope.currentDate;
                     $scope.currentMonth = getMonth($scope.currentDate);
                     $scope.currentYear = getYear($scope.currentDate);
 
