@@ -1,0 +1,12 @@
+<div>
+	<div>
+		<label>Start Date/Time</label>
+		<input ng-model="startDate" ng-focus="showPicker()">
+		<datetime-picker ng-show="isOpen" range="true" date="startDate"></datetime-picker>
+	</div>
+	<div ng-show="range">
+		<label>End Date/Time</label>
+		<input ng-model="endDate" ng-focus="showPicker()">
+		<datetime-picker ng-show="isOpen" range="true" date="endDate"></datetime-picker>
+	</div>
+</div>
