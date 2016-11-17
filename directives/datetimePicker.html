@@ -25,7 +25,7 @@
 
 		<div class="ccs-date-picker-days">
 			
-			<div ng-repeat="d in daysArray track by $index" ng-click="selectDay(d)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
+			<div ng-repeat="d in currentMonthDaysArrary track by $index" ng-click="selectDay(d)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
 				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
 					{{d.day}}
 				</span>

@@ -10,8 +10,9 @@
             restrict: 'E'
             , replace: true
             , scope: {
-                date:'=', 
-                range:'@'
+                date:'=?', 
+                range:'=',
+                isOpen: '=?'
             }
             , templateUrl : "/directives/datetimePicker.html"
             , controller: ['$scope', '$element', '$sce', function ($scope, $element, $sce) {
@@ -22,16 +23,28 @@
                     $scope.currentDate = $scope.date
                 }
 
-                $scope.daysArray = [];
-                
+                $scope.currentMonthDaysArrary = [];
+                $scope.nextMonthDaysArrary = [];
+
                 $scope.model = {
-                    day: '',
-                    month: '',
-                    year: '',
-                    hour: '00',
-                    minute: '00',
-                    second: '00',
-                    millisecond: '000'
+                    start: {
+                        day: '',
+                        month: '',
+                        year: '',
+                        hour: '00',
+                        minute: '00',
+                        second: '00',
+                        millisecond: '000'
+                    },
+                    end: {
+                        day: '',
+                        month: '',
+                        year: '',
+                        hour: '00',
+                        minute: '00',
+                        second: '00',
+                        millisecond: '000'
+                    }
                 }
 
                 var getMonth = function(date){
@@ -93,7 +106,7 @@
                 }
 
                 $scope.generateDays = function(){
-                    $scope.daysArray = [];
+                    $scope.currentMonthDaysArrary = [];
                     var d = new Date($scope.currentDate);
                     var firstDayOfMonth = new Date(d.getFullYear(), d.getMonth(), 1);
                     var lastDayOfMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0);
@@ -124,7 +137,7 @@
                             isSelected: false
                         }
 
-                        $scope.daysArray.push(date);
+                        $scope.currentMonthDaysArrary.push(date);
                     }
 
                     // add current month to display
@@ -138,15 +151,15 @@
                             isSelected: false
                         }
 
-                        $scope.daysArray.push(date);
+                        $scope.currentMonthDaysArrary.push(date);
                     }
 
                     // add next month to display
-                    var mod = $scope.daysArray.length % 7;
+                    var mod = $scope.currentMonthDaysArrary.length % 7;
                     var modDays = 8 - mod;
                     
-                    if(Math.floor($scope.daysArray.length / 7) < 6){
-                        modDays += 7 * (5 - Math.floor($scope.daysArray.length / 7)) ;
+                    if(Math.floor($scope.currentMonthDaysArrary.length / 7) < 6){
+                        modDays += 7 * (5 - Math.floor($scope.currentMonthDaysArrary.length / 7)) ;
                     }
 
                     for(var i = 1; i < modDays; i++){
@@ -158,28 +171,29 @@
                             isSelected: false
                         }
 
-                        $scope.daysArray.push(date);
+                        $scope.currentMonthDaysArrary.push(date);
                     }
+
 
                 }
 
                 $scope.selectDay = function(day){
-                    for(var i = 0; i < $scope.daysArray.length; i++){
-                        $scope.daysArray[i].isSelected = false;
+                    for(var i = 0; i < $scope.currentMonthDaysArrary.length; i++){
+                        $scope.currentMonthDaysArrary[i].isSelected = false;
                     }
                     day.isSelected = true;
-                    $scope.model.year = day.year;
-                    $scope.model.month = day.month;
-                    $scope.model.day = day.day;
+                    $scope.model.start.year = day.year;
+                    $scope.model.start.month = day.month;
+                    $scope.model.start.day = day.day;
                     $scope.currentDate = new Date(day.year, day.month -1, day.day)
                     $scope.generateDays();
                     $scope.date = $scope.currentDate;
                     $scope.currentMonth = getMonth($scope.currentDate);
                     $scope.currentYear = getYear($scope.currentDate);
 
-                    for(var i = 0; i < $scope.daysArray.length; i++){
-                        if($scope.daysArray[i].month == $scope.model.month && $scope.daysArray[i].year == $scope.model.year && $scope.daysArray[i].day == $scope.model.day){
-                            $scope.daysArray[i].isSelected = true;
+                    for(var i = 0; i < $scope.currentMonthDaysArrary.length; i++){
+                        if($scope.currentMonthDaysArrary[i].month == $scope.model.month && $scope.currentMonthDaysArrary[i].year == $scope.model.year && $scope.currentMonthDaysArrary[i].day == $scope.model.day){
+                            $scope.currentMonthDaysArrary[i].isSelected = true;
                         }
                     }
                 }
