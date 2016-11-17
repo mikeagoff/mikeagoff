@@ -17,8 +17,9 @@
 
 		<script src="/controllers/mainController.js"></script>
 
-		<script src="/directives/datetimePicker.js"></script>
-		<link rel="stylesheet" href="/directives/datetimePicker.css">
+		<script src="/directives/datetimePickerWrapper/datetimePickerWrapper.js"></script>
+		<script src="/directives/datetimePicker/datetimePicker.js"></script>
+		<link rel="stylesheet" href="/directives/datetimePicker/datetimePicker.css">
 
 		<link rel="stylesheet" href="/styles/bootstrap.css">
 		<link rel="stylesheet" href="/styles/bootstrap-theme.css">
@@ -32,8 +33,7 @@
 	<body ng-controller="mainCtrl">
         <form id="form1" >
 		    <div ng-cloak>
-		    	<input ng-model="startDate" ng-focus="showPicker()">
-			   <datetime-picker ng-show="isOpen" range="true" date="startDate"></datetime-picker>
+		    	<datetime-picker-wrapper range="true"></datetime-picker-wrapper>
 		    </div>
         </form>
 	</body>
