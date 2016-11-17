@@ -1,6 +1,6 @@
-# DateTimePicker
+# AngularJS DateTimePicker
 
-TODO: Write a project description
+In process...mostly just playing around
 
 ## Usage
 
