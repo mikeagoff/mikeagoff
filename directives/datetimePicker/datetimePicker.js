@@ -355,8 +355,7 @@
                             $scope.model.end.month = day.month;
                             $scope.model.end.day = day.day;
                             $scope.model.end.selected = true;
-                            $scope.currentDate = new Date(day.year, day.month -1, day.day)
-                            $scope.date = $scope.currentDate;
+                            $scope.currentDate = new Date(day.year, day.month -1, day.day);
                             $scope.currentMonth = getMonth($scope.currentDate, true);
                             $scope.currentYear = getYear($scope.currentDate, true);
 
@@ -366,6 +365,12 @@
                                 }
                             }
                         }else{
+
+                            for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
+                                if($scope.firstMonthDaysArrary[i].month == $scope.model.start.month && $scope.firstMonthDaysArrary[i].year == $scope.model.start.year && $scope.firstMonthDaysArrary[i].day == $scope.model.start.day){
+                                    $scope.firstMonthDaysArrary[i].isSelected = true;
+                                }
+                            }
 
                             for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
                                 $scope.firstMonthDaysArrary[i].isSelected = false;
@@ -389,12 +394,12 @@
                         $scope.model.start.year = day.year;
                         $scope.model.start.month = day.month;
                         $scope.model.start.day = day.day;
+                        $scope.model.start.selected = true;
                         $scope.model.end.year = '';
                         $scope.model.end.month = '';
                         $scope.model.end.day = '';
                         $scope.model.end.selected = false;
-                        $scope.currentDate = new Date(day.year, day.month -1, day.day)
-                        $scope.date = $scope.currentDate;
+                        $scope.currentDate = new Date(day.year, day.month -1, day.day);
                         $scope.currentMonth = getMonth($scope.currentDate, true);
                         $scope.currentYear = getYear($scope.currentDate, true);
 
