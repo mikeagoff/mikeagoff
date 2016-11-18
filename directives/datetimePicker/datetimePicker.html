@@ -21,11 +21,22 @@
 					<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
 				</a>
 			</div>
+			<div class="ccs-date-picker-monthYear pull-right" ng-show="range">
+				{{nextMonth}} {{nextYear}}
+			</div>
 		</div>
 
-		<div class="ccs-date-picker-days">
-			
-			<div ng-repeat="d in currentMonthDaysArrary track by $index" ng-click="selectDay(d)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
+		<div class="ccs-date-picker-days pull-left" style="clear: both;">
+			<!-- month 1 -->
+			<div ng-repeat="d in firstMonthDaysArrary track by $index" ng-click="selectDay(d, true)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
+				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
+					{{d.day}}
+				</span>
+			</div>
+		</div>
+		<div class="ccs-date-picker-days pull-right">
+			<!-- month 2 -->
+			<div ng-repeat="d in secondMonthDaysArrary track by $index" ng-click="selectDay(d, false)"  ng-class="{'ccs-date-picker-day': d.type != 'current', 'ccs-date-picker-day-current': d.type == 'current', 'ccs-date-picker-day-selected': d.isSelected}">
 				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
 					{{d.day}}
 				</span>
@@ -37,5 +48,5 @@
 		</div>
 
 	</div>
-	<pre style="position: relative;top: 300px">{{model}}</pre>
+	<pre style="position: relative; top: 500px">{{model}}</pre>
 </div>

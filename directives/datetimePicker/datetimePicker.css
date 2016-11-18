@@ -1,10 +1,12 @@
 .ccs-datetime-picker {
 	width: 340px;
 	height: 400px;
-	position: relative;
+	position: absolute;
 	padding: 5px;
 	border-radius: 5px;
 	box-shadow: 10px 10px 51px -5px rgba(0,0,0,0.54);
+	background: #fff;
+	z-index: 1000
 }
 
 .isRange .ccs-datetime-picker {
@@ -22,21 +24,20 @@
 
 .ccs-date-picker-monthYear {
 	text-align: center;
-	width: 118px;
+	width: 241px;
 }
 .ccs-date-picker-days{
-	clear: both;
-	float: left;
 	margin-top: 10px;
 	cursor: pointer;
+	width: 329px;
 }
 
 .ccs-date-picker-day, .ccs-date-picker-day-current, .ccs-date-picker-day-selected {
 	border-radius: 2px;
 	background: #f3ecec;
 	border: 1px solid #ddd;
-	height: 28px;
-	width: 28px;
+	height: 45px;
+	width: 45px;
 	float: left;
 	margin: 0 2px 2px 0;
 	color: #000;
@@ -53,14 +54,14 @@
 
 .ccs-date-picker-days .one {
     position: relative;
-    top: 3px;
-    left: 10px;
+    top: 6px;
+    left: 12px;
 }
 
 .ccs-date-picker-days .two {
     position: relative;
-    top: 3px;
-    left: 5px;
+    top: 6px;
+    left: 7px;
 }
 
 .ccs-date-picker-day:hover, .ccs-date-picker-day-current:hover {
