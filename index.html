@@ -18,6 +18,8 @@
 		<script src="/controllers/mainController.js"></script>
 
 		<script src="/directives/datetimePickerWrapper/datetimePickerWrapper.js"></script>
+		<link rel="stylesheet" href="/directives/datetimePickerWrapper/datetimePickerWrapper.css">
+
 		<script src="/directives/datetimePicker/datetimePicker.js"></script>
 		<link rel="stylesheet" href="/directives/datetimePicker/datetimePicker.css">
 
@@ -34,6 +36,10 @@
         <form id="form1" >
 		    <div ng-cloak>
 		    	<datetime-picker-wrapper range="true"></datetime-picker-wrapper>
+		    	<br><br><br><br>
+
+		    	<datetime-picker-wrapper range="false"></datetime-picker-wrapper>
+
 		    </div>
         </form>
 	</body>

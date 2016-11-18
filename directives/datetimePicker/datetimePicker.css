@@ -1,10 +1,14 @@
 .ccs-datetime-picker {
-	width: 220px;
-	height: 240px;
+	width: 340px;
+	height: 400px;
 	position: relative;
 	padding: 5px;
 	border-radius: 5px;
 	box-shadow: 10px 10px 51px -5px rgba(0,0,0,0.54);
+}
+
+.isRange .ccs-datetime-picker {
+	width: 700px;
 }
 
 .ccs-date-picker-header {

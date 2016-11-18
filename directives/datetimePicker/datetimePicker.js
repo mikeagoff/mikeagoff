@@ -11,7 +11,7 @@
             , replace: true
             , scope: {
                 date:'=?', 
-                range:'=',
+                range:'=?',
                 isOpen: '=?'
             }
             , templateUrl : "/directives/datetimePicker/datetimePicker.html"
