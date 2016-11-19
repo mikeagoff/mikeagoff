@@ -50,11 +50,18 @@
 .ccs-date-picker-day-selected-start {
 	background: #40af33;
 	color: #fff;
+	font-weight: bold;
 }
 
 .ccs-date-picker-day-selected-end {
 	background: red;
 	color: #fff;
+	font-weight: bold;
+}
+
+.ccs-date-picker-day-selected-startAndEnd {
+	background: linear-gradient(135deg, #40af33 50%, red 50%);
+	font-weight: bold;
 }
 
 
@@ -75,12 +82,8 @@
     left: 13px;
 }
 
-.ccs-date-picker-day:hover, .ccs-date-picker-day-current:hover {
-	background: #ccd9ff!important;
-}
-
-.ccs-date-picker-day-selected:hover {
-	background: #067ab9!important;
+.ccs-date-picker-day:hover, .ccs-date-picker-day-current:hover, .ccs-date-picker-day-selected:hover {
+	opacity: .5;
 }
 
 .adjustMonth {
@@ -88,5 +91,6 @@
 }
 
 .inRange {
-	background: #d1f4b7;
+	background: linear-gradient(180deg, #d1f4b7 50%, #ffa9a9 50%);
+	font-weight: bold;
 }

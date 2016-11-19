@@ -2,6 +2,12 @@
 
 In process...mostly just playing around
 
+# TODOs
+
+* Get selected dates and ranges to be remembered while navigating the picker (changing months/years)
+* Add Time picker for each date (HH:MM:SS.sss)
+* 
+
 ## Usage
 
 TODO: Write usage instructions

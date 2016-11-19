@@ -152,7 +152,8 @@
                 $scope.isStart = function(date){
                     if(date.year == $scope.model.start.year && date.month == $scope.model.start.month && date.day == $scope.model.start.day){
                         return true;
-                    }
+                    } 
+                    return false;
                 }
 
 
@@ -160,6 +161,7 @@
                     if(date.year == $scope.model.end.year && date.month == $scope.model.end.month && date.day == $scope.model.end.day){
                         return true;
                     }
+                    return false;
                 }
 
                 $scope.generateDays = function(){
@@ -202,7 +204,7 @@
                     for(var i = 1; i < daysInMonth + 1; i++){
 
                         var thisDayJson = (new Date(($scope.currentDate).getFullYear(), currentMonth, i));
-                        var currentDayJson = (new Date($scope.currentDate));
+                        var currentDayJson = (new Date());
                         currentDayJson.setHours(0);
                         currentDayJson.setMinutes(0);
                         currentDayJson.setSeconds(0);
@@ -292,12 +294,20 @@
                     // add current month to display
                     for(var i = 1; i < daysInMonth + 1; i++){
 
+                        var thisDayJson = (new Date(($scope.currentDate).getFullYear(), currentMonth, i));
+                        var currentDayJson = (new Date());
+                        currentDayJson.setHours(0);
+                        currentDayJson.setMinutes(0);
+                        currentDayJson.setSeconds(0);
+                        currentDayJson.setMilliseconds(0);
+                        
                         var date = {
                             type: "current",
                             month: currentMonth + 1,
                             day: i,
                             year: new Date($scope.currentDate).getFullYear(),
-                            isSelected: false
+                            isSelected: false,
+                            isToday: (thisDayJson.toJSON() == currentDayJson.toJSON())? true : false
                         }
 
                         $scope.secondMonthDaysArrary.push(date);
@@ -330,53 +340,66 @@
                     if($scope.range 
                         && $scope.model.start.day != '' 
                         && $scope.model.end.day != '' 
-                        && $scope.model.start.year <= day.year
-                        && $scope.model.start.month <= day.month
-                        && $scope.model.start.day < day.day
-                        && $scope.model.end.year >= day.year
-                        && $scope.model.end.month >= day.month
-                        && $scope.model.end.day > day.day){
+                        && (new Date($scope.model.start.year, $scope.model.start.month - 1, $scope.model.start.day) < new Date(day.year, day.month - 1, day.day))
+                        && (new Date($scope.model.end.year, $scope.model.end.month - 1, $scope.model.end.day) > new Date(day.year, day.month - 1, day.day))){
                         return true;
                     }
                     return false;
                 }
 
                 $scope.selectDay = function(day, isFirst){
-
+                    if(day.type == 'previous'){
+                        $scope.minusMonth();
+                    }
+                    if(day.type == 'next'){
+                        $scope.plusMonth();
+                    }
                     if($scope.range){
                         // start and end dates needed
                         if($scope.model.start.day != '' && $scope.model.end.day == ''){
 
+                            for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
+                                $scope.firstMonthDaysArrary[i].inRange = false;
+                            }
                             for(var i = 0; i < $scope.secondMonthDaysArrary.length; i++){
-                                $scope.secondMonthDaysArrary[i].isSelected = false;
+                                $scope.secondMonthDaysArrary[i].inRange = false;
                             }
                             day.isSelected = true;
                             $scope.model.end.year = day.year;
                             $scope.model.end.month = day.month;
                             $scope.model.end.day = day.day;
                             $scope.model.end.selected = true;
-                            $scope.currentDate = new Date(day.year, day.month -1, day.day);
-                            $scope.currentMonth = getMonth($scope.currentDate, true);
-                            $scope.currentYear = getYear($scope.currentDate, true);
+                            $scope.currentDate = new Date(day.year, day.month - 1, day.day);
+                            // $scope.currentMonth = getMonth($scope.currentDate, true);
+                            // $scope.currentYear = getYear($scope.currentDate, true);
 
                             for(var i = 0; i < $scope.secondMonthDaysArrary.length; i++){
                                 if($scope.secondMonthDaysArrary[i].month == $scope.model.end.month && $scope.secondMonthDaysArrary[i].year == $scope.model.end.year && $scope.secondMonthDaysArrary[i].day == $scope.model.end.day){
                                     $scope.secondMonthDaysArrary[i].isSelected = true;
                                 }
-                            }
-                        }else{
-
-                            for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
-                                if($scope.firstMonthDaysArrary[i].month == $scope.model.start.month && $scope.firstMonthDaysArrary[i].year == $scope.model.start.year && $scope.firstMonthDaysArrary[i].day == $scope.model.start.day){
-                                    $scope.firstMonthDaysArrary[i].isSelected = true;
+                                if($scope.secondMonthDaysArrary[i].month == $scope.model.start.month && $scope.secondMonthDaysArrary[i].year == $scope.model.start.year && $scope.secondMonthDaysArrary[i].day == $scope.model.start.day){
+                                    $scope.secondMonthDaysArrary[i].isSelected = true;
+                                }
+                                if($scope.isDayInRange($scope.secondMonthDaysArrary[i])){
+                                    $scope.secondMonthDaysArrary[i].inRange = true;
                                 }
                             }
 
                             for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
+                                if($scope.isDayInRange($scope.firstMonthDaysArrary[i])){
+                                    $scope.firstMonthDaysArrary[i].inRange = true;
+                                }
+                            }
+
+                        }else{
+
+                            for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
                                 $scope.firstMonthDaysArrary[i].isSelected = false;
+                                $scope.firstMonthDaysArrary[i].inRange = false;
                             }
                             for(var i = 0; i < $scope.secondMonthDaysArrary.length; i++){
                                 $scope.secondMonthDaysArrary[i].isSelected = false;
+                                $scope.secondMonthDaysArrary[i].inRange = false;
                             }
                             day.isSelected = true;
 
@@ -389,6 +412,15 @@
                             $scope.model.end.day = '';
                             $scope.model.end.selected = false;
 
+                            for(var i = 0; i < $scope.firstMonthDaysArrary.length; i++){
+                                if($scope.firstMonthDaysArrary[i].month == $scope.model.start.month && $scope.firstMonthDaysArrary[i].year == $scope.model.start.year && $scope.firstMonthDaysArrary[i].day == $scope.model.start.day){
+                                    $scope.firstMonthDaysArrary[i].isSelected = true;
+                                }
+                                if($scope.isDayInRange($scope.firstMonthDaysArrary[i])){
+                                    $scope.firstMonthDaysArrary[i].inRange = true;
+                                }
+                            }
+
                         }
                     }else{
                         $scope.model.start.year = day.year;
@@ -399,7 +431,7 @@
                         $scope.model.end.month = '';
                         $scope.model.end.day = '';
                         $scope.model.end.selected = false;
-                        $scope.currentDate = new Date(day.year, day.month -1, day.day);
+                        $scope.currentDate = new Date(day.year, day.month - 1, day.day);
                         $scope.currentMonth = getMonth($scope.currentDate, true);
                         $scope.currentYear = getYear($scope.currentDate, true);
 

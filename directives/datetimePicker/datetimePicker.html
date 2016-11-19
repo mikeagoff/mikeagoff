@@ -30,7 +30,7 @@
 			<!-- month 1 -->
 			<div ng-repeat="d in firstMonthDaysArrary track by $index" 
 				ng-click="selectDay(d, true)"  
-				ng-class="{'ccs-date-picker-day': d.type != 'current','ccs-date-picker-day-current': d.type == 'current','ccs-date-picker-day-selected-start': (d.isSelected && isStart(d)),'ccs-date-picker-day-selected-end': (d.isSelected && isEnd(d)),'ccs-date-time-picker-today' : d.isToday, 'inRange' : isDayInRange(d)}">
+				ng-class="{'ccs-date-picker-day': d.type != 'current','ccs-date-picker-day-current': d.type == 'current','ccs-date-picker-day-selected-start': (d.isSelected && isStart(d) && d.type == 'current'),'ccs-date-picker-day-selected-end': (d.isSelected && isEnd(d) && d.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (d.isSelected && isStart(d) && d.type == 'current' && isEnd(d)),'ccs-date-time-picker-today' : (d.isToday && !d.inRange && !d.isSelected), 'inRange' : d.inRange && d.type == 'current'}">
 				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
 					{{d.day}}
 				</span>
@@ -40,7 +40,7 @@
 			<!-- month 2 -->
 			<div ng-repeat="n in secondMonthDaysArrary track by $index" 
 				ng-click="selectDay(n, false)"  
-				ng-class="{'ccs-date-picker-day': n.type != 'current','ccs-date-picker-day-current': n.type == 'current','ccs-date-picker-day-selected-start': (n.isSelected && isStart(n)),'ccs-date-picker-day-selected-end': (n.isSelected && isEnd(n)),'ccs-date-time-picker-today' : n.isToday, 'inRange' : isDayInRange(n)}">
+				ng-class="{'ccs-date-picker-day': n.type != 'current','ccs-date-picker-day-current': n.type == 'current','ccs-date-picker-day-selected-start': (n.isSelected && isStart(n) && n.type == 'current'),'ccs-date-picker-day-selected-end': (n.isSelected && isEnd(n) && n.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (n.isSelected && isStart(n) && n.type == 'current' && isEnd(n)),'ccs-date-time-picker-today' : (n.isToday && !n.inRange && !n.isSelected), 'inRange' : n.inRange && n.type == 'current'}">
 				<span ng-class="{one: n.day.toString().length == 1, two: n.day.toString().length == 2}" title="{{n.year}}-{{n.month}}-{{n.day}}">
 					{{n.day}}
 				</span>
