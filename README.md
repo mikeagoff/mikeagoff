@@ -5,7 +5,8 @@ In process...mostly just playing around
 # TODOs
 
 * Get selected dates and ranges to be remembered while navigating the picker (changing months/years)
-* Add Time picker for each date (HH:MM:SS.sss)
+* Validate time picker
+** prevent numbers from being entered that are too large for hours, minutes, and seconds.
 * 
 
 ## Usage
