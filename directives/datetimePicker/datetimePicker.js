@@ -19,10 +19,6 @@
 
                 $scope.currentDate = new Date(Date.now());
 
-                if($scope.date != null && $scope.date != ''){
-                    $scope.currentDate = $scope.date
-                }
-
                 $scope.firstMonthDaysArrary = [];
                 $scope.nextMonthDaysArrary = [];
 
@@ -48,6 +44,45 @@
                         selected: false
                     }
                 }
+                if($scope.date){
+                    if($scope.date.start && $scope.date.start != '' && $scope.date.end && $scope.date.end != ''){
+                        var startDate = new Date($scope.date.start);
+                        var endDate = new Date($scope.date.end);
+                        $scope.model.start = {
+                            day: startDate.getDate(),
+                            month: startDate.getMonth(),
+                            year: startDate.getFullYear(),
+                            hour: startDate.getHours(),
+                            minute: startDate.getMinutes(),
+                            second: startDate.getSeconds(),
+                            millisecond: startDate.getMilliseconds(),
+                            selected: true
+                        }
+                        $scope.model.end = {
+                            day: endDate.getDate(),
+                            month: endDate.getMonth(),
+                            year: endDate.getFullYear(),
+                            hour: endDate.getHours(),
+                            minute: endDate.getMinutes(),
+                            second: endDate.getSeconds(),
+                            millisecond: endDate.getMilliseconds(),
+                            selected: true
+                        }
+                        
+                    
+                    }else{
+                        $scope.date = {
+                            start: {
+                                combined:''
+                            },
+                            end: {
+                                combined:''
+                            }
+                        }
+                    }
+                }
+
+                
 
                 // find the location of the input and use it to position the picker
                 var inputLocation = {
@@ -642,6 +677,9 @@
                             }
                         }
                     }
+
+                    $scope.date.start.combined = new Date($scope.model.start.year,$scope.model.start.month - 1,$scope.model.start.day,$scope.model.start.hour,$scope.model.start.minute,$scope.model.start.second,$scope.model.start.millisecond);
+                    $scope.date.end.combined = new Date($scope.model.end.year,$scope.model.end.month - 1,$scope.model.end.day,$scope.model.end.hour,$scope.model.end.minute,$scope.model.end.second,$scope.model.end.millisecond);
                 }
 
                 $scope.numbersOnly = function(event){
@@ -649,6 +687,12 @@
                         event.preventDefault();
                     }
                 };
+
+                $scope.validateTimeEntry = function(el){
+                    if(el.$error.pattern){
+                        console.log('error: ' + el)
+                    }
+                }
 
                 $scope.generateDays();  
                 

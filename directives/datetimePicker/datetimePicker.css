@@ -14,7 +14,7 @@
 }
 
 .ccs-date-picker-header {
-	font-weight: bold;
+	font-size: 24px;
 }
 
 .ccs-datetime-picker a, .ccs-datetime-picker a:hover {
@@ -91,20 +91,29 @@
 }
 
 .inRange {
-	background: linear-gradient(180deg, #d1f4b7 50%, #ffa9a9 50%);
+	/*background: linear-gradient(180deg, #d1f4b7 50%, #ffa9a9 50%); */
+	background: #feffa3;
 	font-weight: bold;
 }
 
-.ccs-time-picker {
+.ccs-time-picker-start {
 	clear:  both;
 	float: left;
 	width: 337px;
 }
+.ccs-time-picker-end {
+	float: right;
+	width: 337px;
+}
+
+.timeLayout {
+	margin: auto;
+}
 
 .timeLayout input {
-    width: 40px;
-    height: 30px;
-    font-size: 20px;
+    width: 42px;
+    height: 37px;
+    border: none;
 }
 
 .timeLayout input.millisecond {
@@ -113,4 +122,12 @@
 
 .timeLayout i {
 	font-size: 30px;
+}
+
+.timeLayout td{
+	text-align: center;
+}
+
+.timeLayout .timePunctuation, .timeLayout input {
+    font-size: 34px;
 }
