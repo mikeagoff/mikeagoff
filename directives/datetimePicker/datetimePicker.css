@@ -1,6 +1,6 @@
 .ccs-datetime-picker {
-	width: 340px;
-	height: 400px;
+	width: 337px;
+	height: 450px;
 	position: absolute;
 	padding: 5px;
 	border-radius: 5px;
@@ -24,7 +24,7 @@
 
 .ccs-date-picker-monthYear {
 	text-align: center;
-	width: 241px;
+	width: 235px;
 }
 .ccs-date-picker-days{
 	margin-top: 10px;
@@ -33,7 +33,7 @@
 }
 
 .ccs-date-picker-day, .ccs-date-picker-day-current, .ccs-date-picker-day-selected {
-	border-radius: 2px;
+	border-radius: 5px;
 	background: #f3ecec;
 	border: 1px solid #ddd;
 	height: 45px;
@@ -93,4 +93,24 @@
 .inRange {
 	background: linear-gradient(180deg, #d1f4b7 50%, #ffa9a9 50%);
 	font-weight: bold;
+}
+
+.ccs-time-picker {
+	clear:  both;
+	float: left;
+	width: 337px;
+}
+
+.timeLayout input {
+    width: 40px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.timeLayout input.millisecond {
+    width: 60px;
+}
+
+.timeLayout i {
+	font-size: 30px;
 }

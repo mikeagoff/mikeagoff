@@ -149,6 +149,196 @@
                     $scope.generateDays();
                 }
 
+                $scope.increaseTime = function(timePart, isStart){
+                    if(isStart){
+                        switch(timePart){
+                            case 'h':
+                            $scope.model.start.hour++;
+                            if($scope.model.start.hour == 24){
+                                $scope.model.start.hour = 0;
+                            }
+                            if($scope.model.start.hour < 10){
+                                $scope.model.start.hour = '0' + $scope.model.start.hour;
+                            }
+                            break;
+
+                            case 'm':
+                            $scope.model.start.minute++;
+                            if($scope.model.start.minute == 60){
+                                $scope.model.start.minute = 0;
+                            }
+                            if($scope.model.start.minute < 10){
+                                $scope.model.start.minute = '0' + $scope.model.start.minute;
+                            }
+                            break;   
+
+                            case 's':
+                            $scope.model.start.second++;
+                            if($scope.model.start.second == 60){
+                                $scope.model.start.second = 0;
+                            }
+                            if($scope.model.start.second < 10){
+                                $scope.model.start.second = '0' + $scope.model.start.second;
+                            }
+                            break;  
+
+                            case 'ms':
+                            $scope.model.start.millisecond++;
+                            if($scope.model.start.millisecond == 1000){
+                                $scope.model.start.millisecond = 0;
+                            }
+                            if($scope.model.start.millisecond < 100 && $scope.model.start.millisecond > 9){
+                                $scope.model.start.millisecond = '0' + $scope.model.start.millisecond;
+                            }
+                            if($scope.model.start.millisecond < 10){
+                                $scope.model.start.millisecond = '00' + $scope.model.start.millisecond;
+                            }
+                            break;                            
+                        }
+                    }else{
+
+                        switch(timePart){
+                            case 'h':
+                            $scope.model.end.hour++;
+                            if($scope.model.end.hour == 24){
+                                $scope.model.end.hour = 0;
+                            }
+                            if($scope.model.end.hour < 10){
+                                $scope.model.end.hour = '0' + $scope.model.end.hour;
+                            }
+                            break;
+
+                            case 'm':
+                            $scope.model.end.minute++;
+                            if($scope.model.end.minute == 60){
+                                $scope.model.end.minute = 0;
+                            }
+                            if($scope.model.end.minute < 10){
+                                $scope.model.end.minute = '0' + $scope.model.end.minute;
+                            }
+                            break;   
+
+                            case 's':
+                            $scope.model.end.second++;
+                            if($scope.model.end.second == 60){
+                                $scope.model.end.second = 0;
+                            }
+                            if($scope.model.end.second < 10){
+                                $scope.model.end.second = '0' + $scope.model.end.second;
+                            }
+                            break;  
+
+                            case 'ms':
+                            $scope.model.end.millisecond++;
+                            if($scope.model.end.millisecond == 1000){
+                                $scope.model.end.millisecond = 0;
+                            }
+                            if($scope.model.end.millisecond < 100 && $scope.model.end.millisecond > 9){
+                                $scope.model.end.millisecond = '0' + $scope.model.end.millisecond;
+                            }
+                            if($scope.model.end.millisecond < 10){
+                                $scope.model.end.millisecond = '00' + $scope.model.end.millisecond;
+                            }
+                            break;                            
+                        }
+                    }
+                }
+
+                $scope.decreaseTime = function(timePart, isStart){
+                    if(isStart){
+                        switch(timePart){
+                            case 'h':
+                            $scope.model.start.hour--;
+                            if($scope.model.start.hour == -1){
+                                $scope.model.start.hour = 23;
+                            }
+                            if($scope.model.start.hour < 10){
+                                $scope.model.start.hour = '0' + $scope.model.start.hour;
+                            }
+                            break;
+
+                            case 'm':
+                            $scope.model.start.minute--;
+                            if($scope.model.start.minute == -1){
+                                $scope.model.start.minute = 59;
+                            }
+                            if($scope.model.start.minute < 10){
+                                $scope.model.start.minute = '0' + $scope.model.start.minute;
+                            }
+                            break;   
+
+                            case 's':
+                            $scope.model.start.second--;
+                            if($scope.model.start.second == -1){
+                                $scope.model.start.second = 59;
+                            }
+                            if($scope.model.start.second < 10){
+                                $scope.model.start.second = '0' + $scope.model.start.second;
+                            }
+                            break;  
+
+                            case 'ms':
+                            $scope.model.start.millisecond--;
+                            if($scope.model.start.millisecond == -1){
+                                $scope.model.start.millisecond = 999;
+                            }
+                            if($scope.model.start.millisecond < 100 && $scope.model.start.millisecond > 9){
+                                $scope.model.start.millisecond = '0' + $scope.model.start.millisecond;
+                            }
+                            if($scope.model.start.millisecond < 10){
+                                $scope.model.start.millisecond = '00' + $scope.model.start.millisecond;
+                            }
+                            break;                            
+                        }
+                    }else{
+
+                        switch(timePart){
+                            case 'h':
+                            $scope.model.end.hour--;
+                            if($scope.model.end.hour == -1){
+                                $scope.model.end.hour = 23;
+                            }
+                            if($scope.model.end.hour < 10){
+                                $scope.model.end.hour = '0' + $scope.model.end.hour;
+                            }
+                            break;
+
+                            case 'm':
+                            $scope.model.end.minute--;
+                            if($scope.model.end.minute == -1){
+                                $scope.model.end.minute = 59;
+                            }
+                            if($scope.model.end.minute < 10){
+                                $scope.model.end.minute = '0' + $scope.model.end.minute;
+                            }
+                            break;   
+
+                            case 's':
+                            $scope.model.end.second--;
+                            if($scope.model.end.second == -1){
+                                $scope.model.end.second = 59;
+                            }
+                            if($scope.model.end.second < 10){
+                                $scope.model.end.second = '0' + $scope.model.end.second;
+                            }
+                            break;  
+
+                            case 'ms':
+                            $scope.model.end.millisecond--;
+                            if($scope.model.end.millisecond == -1){
+                                $scope.model.end.millisecond = 999;
+                            }
+                            if($scope.model.end.millisecond < 100 && $scope.model.end.millisecond > 9){
+                                $scope.model.end.millisecond = '0' + $scope.model.end.millisecond;
+                            }
+                            if($scope.model.end.millisecond < 10){
+                                $scope.model.end.millisecond = '00' + $scope.model.end.millisecond;
+                            }
+                            break;                            
+                        }
+                    }
+                }
+
                 $scope.isStart = function(date){
                     if(date.year == $scope.model.start.year && date.month == $scope.model.start.month && date.day == $scope.model.start.day){
                         return true;
@@ -370,6 +560,17 @@
                             $scope.model.end.day = day.day;
                             $scope.model.end.selected = true;
                             $scope.currentDate = new Date(day.year, day.month - 1, day.day);
+
+                            if(new Date($scope.model.start.year, $scope.model.start.month - 1, $scope.model.start.day) > $scope.currentDate){
+                                $scope.model.end.year = $scope.model.start.year;
+                                $scope.model.end.month = $scope.model.start.month;
+                                $scope.model.end.day = $scope.model.start.day;
+                                $scope.model.start.year = day.year;
+                                $scope.model.start.month = day.month;
+                                $scope.model.start.day = day.day;
+
+                            }
+
                             // $scope.currentMonth = getMonth($scope.currentDate, true);
                             // $scope.currentYear = getYear($scope.currentDate, true);
 
@@ -443,9 +644,15 @@
                     }
                 }
 
+                $scope.numbersOnly = function(event){
+                    if(isNaN(String.fromCharCode(event.keyCode))){
+                        event.preventDefault();
+                    }
+                };
+
                 $scope.generateDays();  
                 
-                // // set the current date as default
+                // set the current date as default
                 // $scope.setCurrentDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth() + 1, day: $scope.currentDate.getDate() })
 
             }]

@@ -36,7 +36,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="ccs-date-picker-days pull-right">
+		<div class="ccs-date-picker-days pull-right" ng-show="range">
 			<!-- month 2 -->
 			<div ng-repeat="n in secondMonthDaysArrary track by $index" 
 				ng-click="selectDay(n, false)"  
@@ -47,9 +47,55 @@
 			</div>
 		</div>
 
-		<div class="ccs-time-picker">
+		<form name="timePicker">
+			<div class="ccs-time-picker">
+				<table class="timeLayout">
+					<tr>
+						<td><a ng-click="increaseTime('h',true)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('m',true)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('s',true)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('ms',true)"><i class="fa fa-chevron-up"></i></a></td>
+					</tr>
+					<tr>
+						<td><input type="text" maxlength="2" size="2" name="startHour" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.start.hour"></td>
+						<td><input type="text" maxlength="2" size="2" name="startMinute" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.start.minute"></td>
+						<td><input type="text" maxlength="2" size="2" name="startSecond" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.start.second"></td>
+						<td><input class="millisecond" type="text" size="3" maxlength="3" name="startMs" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.start.millisecond"></td>
+					</tr>
+					<tr>
+						<td><a ng-click="decreaseTime('h',true)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('m',true)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('s',true)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('ms',true)"><i class="fa fa-chevron-down"></i></a></td>
+					</tr>
+				</table>
 
-		</div>
+			</div>
+
+			<div class="ccs-time-picker" ng-show="range">
+				<table class="timeLayout">
+					<tr>
+						<td><a ng-click="increaseTime('h',false)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('m',false)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('s',false)"><i class="fa fa-chevron-up"></i></a></td>
+						<td><a ng-click="increaseTime('ms',false)"><i class="fa fa-chevron-up"></i></a></td>
+					</tr>
+					<tr>
+						<td><input type="text" maxlength="2" size="2" name="endSecond" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.end.hour"></td>
+						<td><input type="text" maxlength="2" size="2" name="endSecond" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.end.minute"></td>
+						<td><input type="text" maxlength="2" size="2" name="endSecond" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.end.second"></td>
+						<td><input class="millisecond" type="text" maxlength="3" size="3" name="endMs" ng-keypress="numbersOnly($event)" ng-pattern="/^\d+$/" ng-model="model.end.millisecond"></td>
+					</tr>
+					<tr>
+						<td><a ng-click="decreaseTime('h',false)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('m',false)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('s',false)"><i class="fa fa-chevron-down"></i></a></td>
+						<td><a ng-click="decreaseTime('ms',false)"><i class="fa fa-chevron-down"></i></a></td>
+					</tr>
+				</table>
+
+			</div>
+		</form>
 
 	</div>
 	<pre style="position: relative; top: 500px">{{model}}</pre>
