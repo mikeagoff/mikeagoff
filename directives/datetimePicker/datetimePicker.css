@@ -1,6 +1,6 @@
 .ccs-datetime-picker {
 	width: 337px;
-	height: 450px;
+	height: 550px;
 	position: absolute;
 	padding: 5px;
 	border-radius: 5px;
@@ -106,7 +106,7 @@
 	width: 337px;
 }
 
-.timeLayout {
+.timeLayout, .switch {
 	margin: auto;
 }
 
@@ -119,10 +119,24 @@
 	font-size: 30px;
 }
 
-.timeLayout td{
+.timeLayout td, .switch {
 	text-align: center;
 }
 
 .timeLayout .timePunctuation, .timeLayout input {
-    font-size: 34px;
+    font-size: 30px;
+}
+
+.timeLayout th {
+	text-align: center;
+	font-size: 24px;
+	font-weight: normal!important;
+}
+
+.clearBoth {
+	clear: both;
+}
+
+.ccs-datetime-picker hr {
+	border-top: 4px solid #337ab7
 }

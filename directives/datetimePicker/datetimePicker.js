@@ -16,8 +16,7 @@
             }
             ,link: function (scope, element, attrs) {
             scope.$watch(attrs.date, function (v) {
-                console.log('New Value from field 1: ' + attrs);
-                //console.log('New Value from field 2: ' + ???);
+                
             });
         }
             , templateUrl : "/directives/datetimePicker/datetimePicker.html"
@@ -25,7 +24,6 @@
 
 
                 $scope.currentDate = new Date(Date.now());
-
                 $scope.firstMonthDaysArrary = [];
                 $scope.nextMonthDaysArrary = [];
 
@@ -202,6 +200,9 @@
 
                 $scope.increaseTime = function(timePart, isStart){
                     if(isStart){
+                        if($scope.model.start.day == ''){
+                            $scope.selectDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth(), day: $scope.currentDate.getDate() })
+                        }
                         switch(timePart){
                             case 'h':
                             $scope.model.start.hour++;
@@ -247,6 +248,9 @@
                             break;                            
                         }
                     }else{
+                        if($scope.model.end.day == ''){
+                            $scope.selectDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth(), day: $scope.currentDate.getDate() })
+                        }
 
                         switch(timePart){
                             case 'h':
@@ -293,11 +297,14 @@
                             break;                            
                         }
                     }
-                    $scope.updateAndFormatSelection();5
+                    $scope.updateAndFormatSelection();
                 }
 
                 $scope.decreaseTime = function(timePart, isStart){
                     if(isStart){
+                        if($scope.model.end.day == ''){
+                            $scope.selectDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth(), day: $scope.currentDate.getDate() })
+                        }
                         switch(timePart){
                             case 'h':
                             $scope.model.start.hour--;
@@ -343,6 +350,9 @@
                             break;                            
                         }
                     }else{
+                        if($scope.model.end.day == ''){
+                            $scope.selectDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth(), day: $scope.currentDate.getDate() })
+                        }
 
                         switch(timePart){
                             case 'h':
@@ -590,7 +600,7 @@
                     return false;
                 }
 
-                $scope.selectDay = function(day, isFirst){
+                $scope.selectDay = function(day){
                     if(day.type == 'previous'){
                         $scope.minusMonth();
                     }
@@ -706,9 +716,7 @@
 
                 $scope.generateDays();  
                 
-                // set the current date as default
-                // $scope.setCurrentDay({ year: new Date($scope.currentDate).getFullYear(), month: $scope.currentDate.getMonth() + 1, day: $scope.currentDate.getDate() })
-
+                
             }]
             
         }

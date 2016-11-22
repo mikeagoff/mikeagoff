@@ -1,120 +1,143 @@
 <div ng-class="{ 'isRange': range == true }">
 	
 	<div class="ccs-datetime-picker">
-		<div class="ccs-date-picker-header">
-			<div class="pull-left">
-				<a href="" ng-click="minusYear()">
-					<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-				</a>
-				<a href="" ng-click="minusMonth()" class="adjustMonth">
-					<i class="fa fa-chevron-left"></i>
-				</a>
+		<div id="datePickerDiv">
+			<div class="ccs-date-picker-header">
+				<div class="pull-left">
+					<a href="" ng-click="minusYear()">
+						<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+					</a>
+					<a href="" ng-click="minusMonth()" class="adjustMonth">
+						<i class="fa fa-chevron-left"></i>
+					</a>
+				</div>
+				<div class="ccs-date-picker-monthYear pull-left">
+					{{currentMonth}} {{currentYear}}
+				</div>
+				<div class="pull-right">
+					<a href="" ng-click="plusMonth()" class="adjustMonth">
+						<i class="fa fa-chevron-right"></i>
+					</a>
+					<a href="" ng-click="plusYear()">
+						<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+					</a>
+				</div>
+				<div class="ccs-date-picker-monthYear pull-right" ng-show="range">
+					{{nextMonth}} {{nextYear}}
+				</div>
 			</div>
-			<div class="ccs-date-picker-monthYear pull-left">
-				{{currentMonth}} {{currentYear}}
+
+			<div class="ccs-date-picker-days pull-left" style="clear: both;">
+				<!-- month 1 -->
+				<div ng-repeat="d in firstMonthDaysArrary track by $index" 
+					ng-click="selectDay(d, true)"  
+					ng-class="{'ccs-date-picker-day': d.type != 'current','ccs-date-picker-day-current': d.type == 'current','ccs-date-picker-day-selected-start': (d.isSelected && isStart(d) && d.type == 'current'),'ccs-date-picker-day-selected-end': (d.isSelected && isEnd(d) && d.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (d.isSelected && isStart(d) && d.type == 'current' && isEnd(d)),'ccs-date-time-picker-today' : (d.isToday && !d.inRange && !d.isSelected), 'inRange' : d.inRange && d.type == 'current'}">
+					<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
+						{{d.day}}
+					</span>
+				</div>
 			</div>
-			<div class="pull-right">
-				<a href="" ng-click="plusMonth()" class="adjustMonth">
-					<i class="fa fa-chevron-right"></i>
-				</a>
-				<a href="" ng-click="plusYear()">
-					<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-				</a>
+			<div class="ccs-date-picker-days pull-right" ng-show="range">
+				<!-- month 2 -->
+				<div ng-repeat="n in secondMonthDaysArrary track by $index" 
+					ng-click="selectDay(n, false)"  
+					ng-class="{'ccs-date-picker-day': n.type != 'current','ccs-date-picker-day-current': n.type == 'current','ccs-date-picker-day-selected-start': (n.isSelected && isStart(n) && n.type == 'current'),'ccs-date-picker-day-selected-end': (n.isSelected && isEnd(n) && n.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (n.isSelected && isStart(n) && n.type == 'current' && isEnd(n)),'ccs-date-time-picker-today' : (n.isToday && !n.inRange && !n.isSelected), 'inRange' : n.inRange && n.type == 'current'}">
+					<span ng-class="{one: n.day.toString().length == 1, two: n.day.toString().length == 2}" title="{{n.year}}-{{n.month}}-{{n.day}}">
+						{{n.day}}
+					</span>
+				</div>
 			</div>
-			<div class="ccs-date-picker-monthYear pull-right" ng-show="range">
-				{{nextMonth}} {{nextYear}}
-			</div>
+			<div class="clearBoth"></div>
 		</div>
 
-		<div class="ccs-date-picker-days pull-left" style="clear: both;">
-			<!-- month 1 -->
-			<div ng-repeat="d in firstMonthDaysArrary track by $index" 
-				ng-click="selectDay(d, true)"  
-				ng-class="{'ccs-date-picker-day': d.type != 'current','ccs-date-picker-day-current': d.type == 'current','ccs-date-picker-day-selected-start': (d.isSelected && isStart(d) && d.type == 'current'),'ccs-date-picker-day-selected-end': (d.isSelected && isEnd(d) && d.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (d.isSelected && isStart(d) && d.type == 'current' && isEnd(d)),'ccs-date-time-picker-today' : (d.isToday && !d.inRange && !d.isSelected), 'inRange' : d.inRange && d.type == 'current'}">
-				<span ng-class="{one: d.day.toString().length == 1, two: d.day.toString().length == 2}" title="{{d.year}}-{{d.month}}-{{d.day}}">
-					{{d.day}}
-				</span>
-			</div>
+		<div id="timePickerDiv" class="pull-left clearBoth">
+			<hr>
+			<form name="timePicker">
+				<div class="ccs-time-picker-start">
+					<table class="timeLayout">
+						<thead>
+							<tr>
+								<th colspan="7">Start Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a ng-click="increaseTime('h',true)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('m',true)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('s',true)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('ms',true)"><i class="fa fa-chevron-up"></i></a></td>
+							</tr>
+							<tr>
+								<td><span>{{model.start.hour}}</span></td>
+								<td class="timePunctuation">:</td>
+								<td><span>{{model.start.minute}}</span></td>
+								<td class="timePunctuation">:</td>
+								<td><span>{{model.start.second}}</span></td>
+								<td class="timePunctuation">.</td>
+								<td><span>{{model.start.millisecond}}</span></td>
+							</tr>
+							<tr>
+								<td><a ng-click="decreaseTime('h',true)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('m',true)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('s',true)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('ms',true)"><i class="fa fa-chevron-down"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+				<div class="ccs-time-picker-end" ng-show="range">
+					<table class="timeLayout">
+						<thead>
+							<tr>
+								<th colspan="7">End Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a ng-click="increaseTime('h',false)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('m',false)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('s',false)"><i class="fa fa-chevron-up"></i></a></td>
+								<td></td>
+								<td><a ng-click="increaseTime('ms',false)"><i class="fa fa-chevron-up"></i></a></td>
+							</tr>
+							<tr>
+								<td><span>{{model.end.hour}}</span></td>
+								<td class="timePunctuation">:</td>
+								<td><span>{{model.end.minute}}</span></td>
+								<td class="timePunctuation">:</td>
+								<td><span>{{model.end.second}}</span></td>
+								<td class="timePunctuation">.</td>
+								<td><span>{{model.end.millisecond}}</span></td>
+							</tr>
+							<tr>
+								<td><a ng-click="decreaseTime('h',false)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('m',false)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('s',false)"><i class="fa fa-chevron-down"></i></a></td>
+								<td></td>
+								<td><a ng-click="decreaseTime('ms',false)"><i class="fa fa-chevron-down"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</form>
+
 		</div>
-		<div class="ccs-date-picker-days pull-right" ng-show="range">
-			<!-- month 2 -->
-			<div ng-repeat="n in secondMonthDaysArrary track by $index" 
-				ng-click="selectDay(n, false)"  
-				ng-class="{'ccs-date-picker-day': n.type != 'current','ccs-date-picker-day-current': n.type == 'current','ccs-date-picker-day-selected-start': (n.isSelected && isStart(n) && n.type == 'current'),'ccs-date-picker-day-selected-end': (n.isSelected && isEnd(n) && n.type == 'current'), 'ccs-date-picker-day-selected-startAndEnd' : (n.isSelected && isStart(n) && n.type == 'current' && isEnd(n)),'ccs-date-time-picker-today' : (n.isToday && !n.inRange && !n.isSelected), 'inRange' : n.inRange && n.type == 'current'}">
-				<span ng-class="{one: n.day.toString().length == 1, two: n.day.toString().length == 2}" title="{{n.year}}-{{n.month}}-{{n.day}}">
-					{{n.day}}
-				</span>
-			</div>
-		</div>
 
-		<form name="timePicker">
-			<div class="ccs-time-picker-start">
-				<table class="timeLayout">
-					<tr>
-						<td><a ng-click="increaseTime('h',true)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('m',true)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('s',true)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('ms',true)"><i class="fa fa-chevron-up"></i></a></td>
-					</tr>
-					<tr>
-						<td><span>{{model.start.hour}}</span></td>
-						<td class="timePunctuation">:</td>
-						<td><span>{{model.start.minute}}</span></td>
-						<td class="timePunctuation">:</td>
-						<td><span>{{model.start.second}}</span></td>
-						<td class="timePunctuation">.</td>
-						<td><span>{{model.start.millisecond}}</span></td>
-					</tr>
-					<tr>
-						<td><a ng-click="decreaseTime('h',true)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('m',true)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('s',true)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('ms',true)"><i class="fa fa-chevron-down"></i></a></td>
-					</tr>
-				</table>
-
-			</div>
-
-			<div class="ccs-time-picker-end" ng-show="range">
-				<table class="timeLayout">
-					<tr>
-						<td><a ng-click="increaseTime('h',false)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('m',false)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('s',false)"><i class="fa fa-chevron-up"></i></a></td>
-						<td></td>
-						<td><a ng-click="increaseTime('ms',false)"><i class="fa fa-chevron-up"></i></a></td>
-					</tr>
-					<tr>
-						<td><span>{{model.end.hour}}</span></td>
-						<td class="timePunctuation">:</td>
-						<td><span>{{model.end.minute}}</span></td>
-						<td class="timePunctuation">:</td>
-						<td><span>{{model.end.second}}</span></td>
-						<td class="timePunctuation">.</td>
-						<td><span>{{model.end.millisecond}}</span></td>
-					</tr>
-					<tr>
-						<td><a ng-click="decreaseTime('h',false)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('m',false)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('s',false)"><i class="fa fa-chevron-down"></i></a></td>
-						<td></td>
-						<td><a ng-click="decreaseTime('ms',false)"><i class="fa fa-chevron-down"></i></a></td>
-					</tr>
-				</table>
-
-			</div>
-		</form>
 
 	</div>
+	<div class="pull-left clearBoth"></div>
 	<pre style="position: relative; top: 500px">{{model}}</pre>
 </div>
