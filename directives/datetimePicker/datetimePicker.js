@@ -10,12 +10,19 @@
             restrict: 'E'
             , replace: true
             , scope: {
-                date:'=?', 
+                date:'=', 
                 range:'=?',
                 isOpen: '=?'
             }
+            ,link: function (scope, element, attrs) {
+            scope.$watch(attrs.date, function (v) {
+                console.log('New Value from field 1: ' + attrs);
+                //console.log('New Value from field 2: ' + ???);
+            });
+        }
             , templateUrl : "/directives/datetimePicker/datetimePicker.html"
             , controller: ['$scope', '$element', '$sce', function ($scope, $element, $sce) {
+
 
                 $scope.currentDate = new Date(Date.now());
 
@@ -80,6 +87,15 @@
                             }
                         }
                     }
+                }else{
+                     $scope.date = {
+                            start: {
+                                combined:''
+                            },
+                            end: {
+                                combined:''
+                            }
+                        }
                 }
 
                 
@@ -277,6 +293,7 @@
                             break;                            
                         }
                     }
+                    $scope.updateAndFormatSelection();5
                 }
 
                 $scope.decreaseTime = function(timePart, isStart){
@@ -372,6 +389,7 @@
                             break;                            
                         }
                     }
+                    $scope.updateAndFormatSelection();
                 }
 
                 $scope.isStart = function(date){
@@ -677,21 +695,13 @@
                             }
                         }
                     }
-
-                    $scope.date.start.combined = new Date($scope.model.start.year,$scope.model.start.month - 1,$scope.model.start.day,$scope.model.start.hour,$scope.model.start.minute,$scope.model.start.second,$scope.model.start.millisecond);
-                    $scope.date.end.combined = new Date($scope.model.end.year,$scope.model.end.month - 1,$scope.model.end.day,$scope.model.end.hour,$scope.model.end.minute,$scope.model.end.second,$scope.model.end.millisecond);
+                    $scope.updateAndFormatSelection();
                 }
 
-                $scope.numbersOnly = function(event){
-                    if(isNaN(String.fromCharCode(event.keyCode))){
-                        event.preventDefault();
-                    }
-                };
-
-                $scope.validateTimeEntry = function(el){
-                    if(el.$error.pattern){
-                        console.log('error: ' + el)
-                    }
+                $scope.updateAndFormatSelection = function(){
+                    $scope.date.start.combined = moment(new Date($scope.model.start.year, $scope.model.start.month - 1, $scope.model.start.day, $scope.model.start.hour, $scope.model.start.minute, $scope.model.start.second, $scope.model.start.millisecond)).format('YYYY-MM-DD HH:mm:ss.SSS');
+                    if($scope.model.end.day != '')
+                    $scope.date.end.combined = moment(new Date($scope.model.end.year, $scope.model.end.month - 1, $scope.model.end.day, $scope.model.end.hour, $scope.model.end.minute, $scope.model.end.second, $scope.model.end.millisecond)).format('YYYY-MM-DD HH:mm:ss.SSS');
                 }
 
                 $scope.generateDays();  

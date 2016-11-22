@@ -18,7 +18,8 @@
                 
                 $scope.showPicker = function(){
                     $scope.isOpen = true; 
-                }              
+                };
+
 
             }],
 

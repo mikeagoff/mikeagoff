@@ -1,33 +1,25 @@
-# AngularJS DateTimePicker
+# AngularJS DTP
 
-In process...mostly just playing around
+In process...
 
 # TODOs
 
 * Get selected dates and ranges to be remembered while navigating the picker (changing months/years)
-* Validate time picker
-** prevent numbers from being entered that are too large for hours, minutes, and seconds.
+** Plus/minus month causes selections to be cleared from picker, but model retains them.
+* Update picker when inputs change
+* fix selection in second calendar causes minus month to not change the displays (same for first calendar and plus month)
 * 
 
 ## Usage
 
 TODO: Write usage instructions
 
-## Contributing
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+## Requires
+AngularJS v1.5+
+UI-Bootstrap v2.2
+moment.js v2.16
 
-## History
-
-TODO: Write history
-
-## Credits
-
-TODO: Write credits
 
 ## License
 

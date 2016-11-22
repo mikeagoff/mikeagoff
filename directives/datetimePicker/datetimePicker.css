@@ -110,14 +110,9 @@
 	margin: auto;
 }
 
-.timeLayout input {
-    width: 42px;
-    height: 37px;
-    border: none;
-}
+.timeLayout td span {
+	font-size: 34px;
 
-.timeLayout input.millisecond {
-    width: 60px;
 }
 
 .timeLayout i {
